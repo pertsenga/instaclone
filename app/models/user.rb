@@ -10,4 +10,5 @@ class User < ApplicationRecord
 
   has_many :photos, dependent: :delete_all
   has_many :comments, dependent: :delete_all
+  has_many :friendships, dependent: :delete_all
 end
