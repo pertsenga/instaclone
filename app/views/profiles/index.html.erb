@@ -9,7 +9,21 @@
   <% @users.each do |user| %>
     <p>
       <%= link_to user.username, profile_path(user.username) %>
-      (<%= link_to 'Add friend', send_request_path(user.id), method: :post %>)
+      (
+        <% if user == current_user %>
+          You
+        <% elsif user.has_friendship_with?(current_user) %>
+          <% if user.friendship_with(current_user).accepted_at? %>
+            You're friends!
+          <% elsif user.friendship_with(current_user).rejected_at? %>
+            Request rejected.
+          <% else %>
+            Request sent!
+          <% end %>
+        <% else %>
+          <%= link_to 'Send friend request', send_request_path(user.id), method: :post %>
+        <% end %>
+      )
     </p>
   <% end %>
 </div>

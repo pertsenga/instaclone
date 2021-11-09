@@ -19,4 +19,12 @@ class User < ApplicationRecord
   def friend_ids
     Friendship.of_user(self).accepted.pluck(:user_id, :friend_id).flatten.uniq - [self.id]
   end
+
+  def has_friendship_with?(user)
+    friendship_with(user).present?
+  end
+
+  def friendship_with(user)
+    Friendship.where(user: self, friend: user).or(Friendship.where(user: user, friend: self)).first
+  end
 end
