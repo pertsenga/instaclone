@@ -6,9 +6,9 @@ class ProfilesController < ApplicationController
 
   def index
     @users = if params[:username]&.present?
-               User.where(username: params[:username])
+               User.where(username: params[:username]).includes(:friendships)
              else
-               User.limit(20)
+               User.limit(20).includes(:friendships)
              end
   end
 
