@@ -16,4 +16,18 @@
       <% end %>
     <% end %>
   <% end %>
+
+  <h4>Friends</h4>
+  <% if @user.friends.empty? %>
+    <p>
+      No friends yet.
+      <% if current_user&.eql? @user %>
+        Add friends <%= link_to 'here.', profiles_path %>
+      <% end %>
+    </p>
+  <% else %>
+    <% @user.friends.each do |user| %>
+      <%= link_to user.username, profile_path(user.id) %>
+    <% end %>
+  <% end %>
 </div>
