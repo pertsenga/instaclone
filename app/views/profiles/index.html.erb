@@ -9,6 +9,7 @@
   <% @users.each do |user| %>
     <p>
       <%= link_to user.username, profile_path(user.username) %>
+      (<%= link_to 'Add friend', send_request_path(user.id), method: :post %>)
     </p>
   <% end %>
 </div>
