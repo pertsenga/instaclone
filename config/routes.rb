@@ -5,8 +5,7 @@ Rails.application.routes.draw do
     get '/users', to: 'devise/registrations#new'
   end
 
-  resources :profiles, only: [:index]
-  get 'profiles/:username', to: 'profiles#show', as: :profile
+  resources :profiles, only: [:index, :show]
   post '/profiles/:id/send_request', to: 'profiles#send_request', as: :send_request
 
   resources :photos, only: [:index, :show, :new, :create, :destroy]

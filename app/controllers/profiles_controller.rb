@@ -5,15 +5,15 @@ class ProfilesController < ApplicationController
   rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
 
   def index
-    @users = if params[:username]&.present?
-               User.where(username: params[:username]).includes(:friendships)
+    @users = if params[:id]&.present?
+               User.find(params[:id]).includes(:friendships)
              else
                User.limit(20).includes(:friendships)
              end
   end
 
   def show
-    @user = User.find_by! username: params[:username]
+    @user = User.find params[:id]
   end
 
   def send_request
