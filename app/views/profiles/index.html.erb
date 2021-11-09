@@ -10,7 +10,7 @@
     <p>
       <%= link_to user.username, profile_path(user.id) %>
       (
-        <% if user == current_user %>
+        <% if user.eql? current_user %>
           You
         <% elsif user.has_friendship_with?(current_user) %>
           <% if user.friendship_with(current_user).accepted_at? %>
