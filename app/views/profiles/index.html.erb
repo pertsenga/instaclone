@@ -16,9 +16,15 @@
           <% if user.friendship_with(current_user).accepted_at? %>
             You're friends!
           <% elsif user.friendship_with(current_user).rejected_at? %>
-            Request rejected.
+            Request rejected
+            <% if user.friendship_with(current_user).friend.eql? current_user %>
+              by you
+            <% end %>
           <% else %>
-            Request sent!
+            Request sent
+            <% if user.friendship_with(current_user).friend.eql? current_user %>
+              to you
+            <% end %>
           <% end %>
         <% else %>
           <%= link_to 'Send friend request', send_request_path(user.id), method: :post %>

@@ -14,6 +14,7 @@ class ProfilesController < ApplicationController
 
   def show
     @user = User.find params[:id]
+    @requests = Friendship.where(friend: @user).pending.includes(:user)
   end
 
   def send_request

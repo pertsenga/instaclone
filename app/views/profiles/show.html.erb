@@ -30,4 +30,19 @@
       <%= link_to user.username, profile_path(user.id) %>
     <% end %>
   <% end %>
+
+  <% if current_user&.eql? @user %>
+    <h4>Friend Requests</h4>
+    <% if @requests.empty? %>
+      <p>No friend requests yet.</p>
+    <% else %>
+      <% @requests.each do |request| %>
+        <%= link_to request.user.username, profile_path(request.user.id) %>
+        (
+          <%= link_to 'Accept', accept_request_path(request.id), method: :post %> |
+          <%= link_to 'Decline', decline_request_path(request.id), method: :post %>
+        )
+      <% end %>
+    <% end %>
+  <% end %>
 </div>
