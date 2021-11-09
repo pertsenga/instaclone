@@ -22,4 +22,16 @@ class ProfilesController < ApplicationController
 
     redirect_to profiles_url
   end
+
+  def accept_request
+    Friendship.find(params[:id]).update(accepted_at: DateTime.now)
+
+    redirect_to profile_path(current_user)
+  end
+
+  def decline_request
+    Friendship.find(params[:id]).update(rejected_at: DateTime.now)
+
+    redirect_to profile_path(current_user)
+  end
 end

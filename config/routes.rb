@@ -7,6 +7,8 @@ Rails.application.routes.draw do
 
   resources :profiles, only: [:index, :show]
   post '/profiles/:id/send_request', to: 'profiles#send_request', as: :send_request
+  post '/friendships/:id/accept', to: 'profiles#accept_request', as: :accept_request
+  post '/friendships/:id/decline', to: 'profiles#decline_request', as: :decline_request
 
   resources :photos, only: [:index, :show, :new, :create, :destroy]
 
